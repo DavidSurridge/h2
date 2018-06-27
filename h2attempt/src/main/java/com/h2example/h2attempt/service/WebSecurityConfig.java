@@ -30,8 +30,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        
-        httpSecurity.csrf().disable();
+         httpSecurity.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/home", "/about").permitAll()
+                .antMatchers("/admin/**").hasAnyRole("Admin")
+                .antMatchers("/user/**").hasAnyRole("User")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
+        //.and().exceptionHandling().accessDeniedPage("/403");
         httpSecurity.headers().frameOptions().disable();
                 
     }
