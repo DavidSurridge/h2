@@ -68,5 +68,5 @@ public class UserController {
   @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
     public String currentUserName(Authentication authentication) {
-        return "Name: " + authentication.getName() +"Permissions: " + authentication.getAuthorities().toString() + "athenticated: " + authentication.isAuthenticated();
+        return "Name: " + authentication.getName() +" Permissions: " + authentication.getAuthorities().toString() + " athenticated: " + authentication.isAuthenticated();
     }}
